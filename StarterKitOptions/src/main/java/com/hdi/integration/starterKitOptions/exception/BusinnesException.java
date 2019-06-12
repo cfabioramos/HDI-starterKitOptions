@@ -1,4 +1,4 @@
-package com.hdi.integration.insurancePolicyDetails.exception;
+package com.hdi.integration.starterKitOptions.exception;
 
 public class BusinnesException extends RuntimeException {
 

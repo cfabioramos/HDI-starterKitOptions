@@ -1,6 +1,6 @@
-package com.hdi.integration.insurancePolicyDetails.controller.common;
+package com.hdi.integration.starterKitOptions.controller.common;
 
-import com.hdi.integration.insurancePolicyDetails.exception.BusinnesException;
+import com.hdi.integration.starterKitOptions.exception.BusinnesException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(BusinnesException.class)
 	public ResponseEntity<ApiErrorResponse> businnesExceptionHandler(BusinnesException ex, HttpServletRequest request) {
 		ApiErrorResponse response = new ApiErrorResponse(EnumExceptionCode.DATA_INVALID, ex.getMessage(), null);
-		return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
 	
 	@Override

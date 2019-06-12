@@ -1,5 +1,8 @@
-package com.hdi.integration.insurancePolicyDetails.util;
+package com.hdi.integration.starterKitOptions.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -17,11 +20,20 @@ public class ObjectConverter {
 
     static {
         Method[] methods = ObjectConverter.class.getDeclaredMethods();
-        for (Method method: methods) {
+        for (Method method : methods) {
             if (method.getName().startsWith("convertFrom")) {
                 converters.put(method.getName(), method);
             }
         }
+    }
+
+    public static String getJsonFromObject(Object from) {
+        try {
+            return new ObjectMapper().writeValueAsString(from);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static <T> T convert(Object from, Class<T> toClass) {
@@ -300,7 +312,7 @@ public class ObjectConverter {
         if (value == null)
             return null;
 
-        Instant instant = Instant.ofEpochMilli(((Date)value).getTime());
+        Instant instant = Instant.ofEpochMilli(((Date) value).getTime());
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         return localDateTime.toLocalDate();
     }

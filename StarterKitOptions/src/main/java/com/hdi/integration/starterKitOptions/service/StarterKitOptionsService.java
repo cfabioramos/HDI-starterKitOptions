@@ -1,6 +1,8 @@
-package com.hdi.integration.StarterKitOptions.service;
+package com.hdi.integration.starterKitOptions.service;
 
-import com.hdi.integration.insurancePolicyDetails.repository.InsurancePolicyDetailsRepository;
+import com.hdi.integration.starterKitOptions.dto.Document;
+import com.hdi.integration.starterKitOptions.repository.StarterKitOptionsRepository;
+import com.hdi.integration.starterKitOptions.util.ObjectConverter;
 import com.progress.open4gl.Open4GLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,12 +10,13 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class InsurancePolicyDetailsService {
+public class StarterKitOptionsService {
 	
 	@Autowired
-	private InsurancePolicyDetailsRepository repository;
+	private StarterKitOptionsRepository repository;
 
-	public void getInsurancePolicyDetails(String idInsurancePolicy) throws Open4GLException, IOException {
-		repository.getInsurancePolicyDetails(idInsurancePolicy);
+	public void getStarterKitOptions(String idInsurancePolicy) throws Open4GLException, IOException {
+		repository.getStarterKitOptions(ObjectConverter.getJsonFromObject(new Document(idInsurancePolicy)));
 	}
+
 }

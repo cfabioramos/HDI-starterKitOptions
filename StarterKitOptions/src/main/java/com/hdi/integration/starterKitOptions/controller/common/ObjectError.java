@@ -1,4 +1,4 @@
-package com.hdi.integration.insurancePolicyDetails.controller.common;
+package com.hdi.integration.starterKitOptions.controller.common;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

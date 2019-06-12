@@ -1,4 +1,4 @@
-package com.hdi.integration.insurancePolicyDetails.controller.common;
+package com.hdi.integration.starterKitOptions.controller.common;
 
 public enum EnumExceptionCode {
 

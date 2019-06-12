@@ -1,5 +1,6 @@
-package com.hdi.integration.StarterKitOptions.repository;
+package com.hdi.integration.starterKitOptions.repository;
 
+import com.hdi.integration.starterKitOptions.exception.BusinnesException;
 import com.progress.open4gl.Open4GLException;
 import com.progress.open4gl.javaproxy.Connection;
 import com.progress.open4gl.javaproxy.OpenAppObject;
@@ -11,14 +12,14 @@ import org.springframework.stereotype.Repository;
 import java.io.IOException;
 
 @Repository
-public class InsurancePolicyDetailsRepository {
+public class StarterKitOptionsRepository {
 
 	@Value("${URI_PROGRESS}")
 	private String URI_PROGRESS;
 	
-	private static String PROC_NAME = "msvc_det_apolice.p";
+	private static String PROC_NAME = "msvc_lst_material_impresso.p";
 	
-	public void getInsurancePolicyDetails(String idInsurancePolicy) throws Open4GLException, IOException {
+	public void getStarterKitOptions(String jsonDocumentObject) throws Open4GLException, IOException {
 
 		Connection progressConnection = null;
 
@@ -28,7 +29,7 @@ public class InsurancePolicyDetailsRepository {
 			OpenAppObject openAppObject = new OpenAppObject(progressConnection, "");
 
 			ParamArray parameters = new ParamArray(1);
-			parameters.addCharacter(0, idInsurancePolicy, ParamArrayMode.INPUT);
+			parameters.addCharacter(0, jsonDocumentObject, ParamArrayMode.INPUT);
 			openAppObject.runProc(PROC_NAME, parameters);
 
 			String lSaidaDetApol = (String) parameters.getOutputParameter(1);
@@ -41,6 +42,9 @@ public class InsurancePolicyDetailsRepository {
 	//			connection.finalize();
 	//			throw new BusinnesException(messageError);
 	//		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new BusinnesException(e.getMessage());
 		}
 		finally {
 			progressConnection.finalize();
