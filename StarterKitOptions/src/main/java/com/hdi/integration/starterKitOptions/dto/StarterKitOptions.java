@@ -1,6 +1,7 @@
 package com.hdi.integration.starterKitOptions.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hdi.integration.starterKitOptions.util.ObjectConverter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +16,15 @@ import java.util.Objects;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-06-11T14:23:30.536Z")
 
 public class StarterKitOptions {
+
+  public StarterKitOptions(){}
+
+  public StarterKitOptions(Object id, Object description, Object flagReason) {
+    this.id = ObjectConverter.convert(id, Long.class);
+    this.description = ObjectConverter.convert(description, String.class);
+    this.flagReason = ObjectConverter.convert(flagReason, Boolean.class);
+  }
+
   @JsonProperty("id")
   private Long id = null;
 

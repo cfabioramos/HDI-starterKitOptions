@@ -7,9 +7,11 @@ import com.progress.open4gl.javaproxy.OpenAppObject;
 import com.progress.open4gl.javaproxy.ParamArray;
 import com.progress.open4gl.javaproxy.ParamArrayMode;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Repository
 public class StarterKitOptionsRepository {
@@ -19,7 +21,7 @@ public class StarterKitOptionsRepository {
 	
 	private static String PROC_NAME = "msvc_lst_material_impresso.p";
 	
-	public void getStarterKitOptions(String jsonDocumentObject) throws Open4GLException, IOException {
+	public Map<String, Object> getStarterKitOptions(String jsonDocumentObject) throws Open4GLException, IOException {
 
 		Connection progressConnection = null;
 
@@ -28,20 +30,24 @@ public class StarterKitOptionsRepository {
 			progressConnection.setSessionModel(1);
 			OpenAppObject openAppObject = new OpenAppObject(progressConnection, "");
 
-			ParamArray parameters = new ParamArray(1);
-			parameters.addCharacter(0, jsonDocumentObject, ParamArrayMode.INPUT);
+			ParamArray parameters = new ParamArray(2);
+			parameters.addLongchar(0, jsonDocumentObject, ParamArrayMode.INPUT);
+			parameters.addLongchar(1, "", ParamArrayMode.OUTPUT);
+
 			openAppObject.runProc(PROC_NAME, parameters);
 
-			String lSaidaDetApol = (String) parameters.getOutputParameter(1);
+			String ttDadosRetornoMatImp = (String) parameters.getOutputParameter(1);
 			// String messageError = (String) parameters.getOutputParameter(MESSAGE_ERROR.getCode());
 			// boolean hasError = (boolean) parameters.getOutputParameter(HAS_ERROR.getCode());
 
-			System.out.println(lSaidaDetApol);
+			System.out.println(ttDadosRetornoMatImp);
 
 	//		if(hasError) {
-	//			connection.finalize();
 	//			throw new BusinnesException(messageError);
 	//		}
+
+			return (new GsonJsonParser()).parseMap(ttDadosRetornoMatImp);
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw new BusinnesException(e.getMessage());

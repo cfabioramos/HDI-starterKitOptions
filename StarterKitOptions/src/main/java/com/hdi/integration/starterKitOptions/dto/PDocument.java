@@ -1,54 +1,55 @@
 package com.hdi.integration.starterKitOptions.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PDocument implements Serializable {
 
-    public PDocument(String documento){
-        this.dsEntradaLst2Via = new DsEntradaLst2Via(documento);
+    public PDocument(Long nuDocu){
+        this.dsEntradaMatImp = new DsEntradaMatImp(nuDocu);
     }
 
-    private DsEntradaLst2Via dsEntradaLst2Via;
+    private DsEntradaMatImp dsEntradaMatImp;
 
-    public DsEntradaLst2Via getDsEntradaLst2Via() {
-        return dsEntradaLst2Via;
+    public DsEntradaMatImp getDsEntradaMatImp() {
+        return dsEntradaMatImp;
     }
 
-    public void setDsEntradaLst2Via(DsEntradaLst2Via dsEntradaLst2Via) {
-        this.dsEntradaLst2Via = dsEntradaLst2Via;
-    }
+    private class DsEntradaMatImp {
 
-    private class DsEntradaLst2Via {
-
-        public DsEntradaLst2Via(String documento) {
-            this.ttEntradaLst2Via = new TtEntradaLst2Via(documento);
+        public DsEntradaMatImp(Long nuDocu) {
+            this.paramEntrada = new ArrayList<>();
+            this.paramEntrada.add(new ParamEntrada(nuDocu));
         }
 
-        private TtEntradaLst2Via ttEntradaLst2Via;
+        private List<ParamEntrada> paramEntrada;
 
-        public TtEntradaLst2Via getTtEntradaLst2Via() {
-            return ttEntradaLst2Via;
+        public List<ParamEntrada> getParamEntrada() {
+            return paramEntrada;
         }
 
-        public void setTtEntradaLst2Via(TtEntradaLst2Via ttEntradaLst2Via) {
-            this.ttEntradaLst2Via = ttEntradaLst2Via;
+        public void setParamEntrada(List<ParamEntrada> paramEntrada) {
+            this.paramEntrada = paramEntrada;
         }
     }
 
-    private class TtEntradaLst2Via {
+    private class ParamEntrada {
 
-        public TtEntradaLst2Via(String documento) {
-            this.documento = documento;
+        public ParamEntrada(Long nuDocu) {
+            this.chave_doc = nuDocu;
         }
 
-        private String documento;
+        private Long chave_doc;
 
-        public String getDocumento() {
-            return documento;
+        public Long getChave_doc() {
+            return chave_doc;
         }
 
-        public void setDocumento(String documento) {
-            this.documento = documento;
+        public void setChave_doc(Long chave_doc) {
+            this.chave_doc = chave_doc;
         }
+
     }
+
 }
