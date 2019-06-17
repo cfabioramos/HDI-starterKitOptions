@@ -1,8 +1,8 @@
 package com.hdi.integration.starterKitOptions.service;
 
+import com.hdi.integration.starterKitOptions.dto.DocumentDeliveryOptions;
 import com.hdi.integration.starterKitOptions.dto.PDocument;
-import com.hdi.integration.starterKitOptions.dto.StarterKitOptions;
-import com.hdi.integration.starterKitOptions.repository.StarterKitOptionsRepository;
+import com.hdi.integration.starterKitOptions.repository.DocumentDeliveryOptionsRepository;
 import com.hdi.integration.starterKitOptions.util.ObjectConverter;
 import com.progress.open4gl.Open4GLException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,21 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class StarterKitOptionsService {
+public class DocumentDeliveryOptionsService {
 	
 	@Autowired
-	private StarterKitOptionsRepository repository;
+	private DocumentDeliveryOptionsRepository repository;
 
-	public List<StarterKitOptions> getStarterKitOptions(Long idInsurancePolicy) throws Open4GLException, IOException {
-		Map<String, Object> mapRet = repository.getStarterKitOptions(ObjectConverter.getJsonFromObject(new PDocument(idInsurancePolicy)));
+	public List<DocumentDeliveryOptions> findOptionsByDocument(Long idInsurancePolicy) throws Open4GLException, IOException {
+
+		Map<String, Object> mapRet = repository.findOptionsByDocument(ObjectConverter.getJsonFromObject(new PDocument(idInsurancePolicy)));
 
 		List options = (List)mapRet.get("DadosRetorno");
 
 		if (options!=null && !options.isEmpty()) {
-			List<StarterKitOptions> optionsList = new ArrayList<>();
+			List<DocumentDeliveryOptions> optionsList = new ArrayList<>();
 			options.forEach(option ->
-					optionsList.add(new StarterKitOptions(
+					optionsList.add(new DocumentDeliveryOptions(
 							((Map)option).get("tipSolicitacao"),
 							((Map)option).get("desSolicitacao"),
 							((Map)option).get("flgMotivo"))));

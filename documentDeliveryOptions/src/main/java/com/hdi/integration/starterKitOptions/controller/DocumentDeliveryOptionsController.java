@@ -3,13 +3,11 @@ package com.hdi.integration.starterKitOptions.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdi.integration.starterKitOptions.controller.common.ApiErrorResponse;
 import com.hdi.integration.starterKitOptions.controller.common.EnumExceptionCode;
-import com.hdi.integration.starterKitOptions.service.StarterKitOptionsService;
+import com.hdi.integration.starterKitOptions.service.DocumentDeliveryOptionsService;
 import com.progress.open4gl.Open4GLException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,27 +17,27 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/insurancepolicy/{idInsurancePolicy}")
-@Api("InsurancePolicy Start Kit Options")
-public class StarterKitOptionsController {
+@Api("InsurancePolicy Document Delivery Options")
+public class DocumentDeliveryOptionsController {
 
-    private static final Logger log = LoggerFactory.getLogger(StarterKitOptionsController.class);
+//    private static final Logger log = LoggerFactory.getLogger(DocumentDeliveryOptionsController.class);
 
-    private StarterKitOptionsService service;
+    private DocumentDeliveryOptionsService service;
 
     private final HttpServletRequest request;
 
     private final ObjectMapper objectMapper;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public StarterKitOptionsController(
-            ObjectMapper objectMapper, HttpServletRequest request, StarterKitOptionsService service) {
+    public DocumentDeliveryOptionsController(
+            ObjectMapper objectMapper, HttpServletRequest request, DocumentDeliveryOptionsService service) {
         this.objectMapper = objectMapper;
         this.request = request;
         this.service = service;
     }
 
     @ApiOperation(value = "Send Start Kit Options")
-    @GetMapping(value = "/starterKitOptions", produces = {"application/json"})
+    @GetMapping(value = "/documentDeliveryOptions", produces = {"application/json"})
     public ResponseEntity<?> getStarterKitOptions(
             @ApiParam(value = "Company ID", required = true) @RequestHeader(value = "X-Company-Id", required = true) String xCompanyId,
             @ApiParam(value = "Application ID", required = true) @RequestHeader(value = "X-Application-Id", required = true) String xApplicationId,
@@ -49,7 +47,7 @@ public class StarterKitOptionsController {
 
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
-            return new ResponseEntity<>(this.service.getStarterKitOptions(idInsurancePolicy), HttpStatus.OK);
+            return new ResponseEntity<>(this.service.findOptionsByDocument(idInsurancePolicy), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hdi.integration</groupId>
-	<artifactId>starterKitOptions</artifactId>
+	<artifactId>documentDeliveryOptions</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>starterKitOptions</name>
+	<name>documentDeliveryOptions</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

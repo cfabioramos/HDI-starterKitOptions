@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StarterKitOptionsApplication {
+public class DocumentDeliveryOptionsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StarterKitOptionsApplication.class, args);
+		SpringApplication.run(DocumentDeliveryOptionsApplication.class, args);
 	}
 
 }

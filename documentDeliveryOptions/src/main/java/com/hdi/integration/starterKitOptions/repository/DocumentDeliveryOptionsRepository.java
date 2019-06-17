@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.util.Map;
 
 @Repository
-public class StarterKitOptionsRepository {
+public class DocumentDeliveryOptionsRepository {
 
 	@Value("${URI_PROGRESS}")
 	private String URI_PROGRESS;
 	
 	private static String PROC_NAME = "msvc_lst_material_impresso.p";
 	
-	public Map<String, Object> getStarterKitOptions(String jsonDocumentObject) throws Open4GLException, IOException {
+	public Map<String, Object> findOptionsByDocument(String jsonDocumentObject) throws Open4GLException, IOException {
 
 		Connection progressConnection = null;
 
